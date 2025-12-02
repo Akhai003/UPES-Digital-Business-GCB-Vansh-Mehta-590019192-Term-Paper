@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Context of Business: WTO Term Paper</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+    <style>
+        /* --- VARIABLES --- */
+        :root {
+            --bg-dark: #020617;
+            --gold: #FFD700;
+            --blue: #00f3ff;
+            --purple: #bc13fe;
+            --red: #ff0055;
+            --green: #00ff9d;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #e2e8f0;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* --- BASE FONT SETTINGS --- */
+        h1, h2, h3, h4, h5, h6, .cinzel { 
+            font-family: 'Cinzel', serif; 
+            letter-spacing: -0.01em;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: inline-block;
+            color: #fff; /* Default static color */
+        }
+
+        /* --- 1. PROFESSOR NAME --- */
+        .prof-animate {
+            font-weight: 800;
+            background: linear-gradient(to right, #ffffff 20%, #00f3ff 30%, #ff00ff 50%, #00f3ff 70%, #ffffff 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-size: 200% auto;
+            color: #fff;
+            transition: all 0.5s ease;
+            animation: shine 3s linear infinite;
+            animation-play-state: paused;
+        }
+        .prof-animate:hover {
+            color: transparent;
+            animation-play-state: running;
+            transform: scale(1.15);
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.6), 0 0 60px rgba(255, 0, 255, 0.4);
+            letter-spacing: 0.05em;
+        }
+
+        /* --- 2. H1 (MAIN TITLE): "COSMIC FUSION" --- */
+        h1:hover {
+            background: linear-gradient(to right, #fff 0%, #3b82f6 25%, #9333ea 50%, #3b82f6 75%, #fff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-size: 200% auto;
+            color: transparent;
+            animation: shine 2s linear infinite;
+            transform: scale(1.05) skewX(-2deg);
+            text-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+        }
+
+        /* --- 3. H2 (SECTION TITLES): "SOLAR FLARE" --- */
+        h2:hover {
+            background: linear-gradient(to right, #fff 0%, #facc15 25%, #f97316 50%, #facc15 75%, #fff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-size: 200% auto;
+            color: transparent;
+            animation: shine 2s linear infinite;
+            transform: translateX(10px) scale(1.02);
+            text-shadow: 0 0 30px rgba(250, 204, 21, 0.4);
+        }
+
+        /* --- 4. H3 (SUB-HEADERS): "VENOM NEON" --- */
+        h3:hover {
+            background: linear-gradient(to right, #fff 0%, #4ade80 25%, #22d3ee 50%, #4ade80 75%, #fff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-size: 200% auto;
+            color: transparent;
+            animation: shine 2s linear infinite;
+            transform: translateX(8px);
+            text-shadow: 0 0 25px rgba(74, 222, 128, 0.4);
+        }
+
+        /* --- 5. H4 (MINOR HEADERS): "CYBER BERRY" --- */
+        h4:hover {
+            background: linear-gradient(to right, #fff 0%, #f472b6 25%, #a855f7 50%, #f472b6 75%, #fff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-size: 200% auto;
+            color: transparent;
+            animation: shine 2s linear infinite;
+            transform: translateX(5px);
+            text-shadow: 0 0 20px rgba(244, 114, 182, 0.4);
+        }
+
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* --- NEBULA BACKGROUND --- */
+        .nebula-container {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -5;
+            background: radial-gradient(circle at 50% 50%, #0f172a 0%, #000000 100%); overflow: hidden;
+        }
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.45;
+            animation: orbFloat 15s infinite alternate ease-in-out;
+        }
+        .orb-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: #1e3a8a; }
+        .orb-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: #581c87; animation-delay: -5s; }
+        .orb-3 { top: 40%; left: 30%; width: 40vw; height: 40vw; background: #b45309; opacity: 0.2; }
+        @keyframes orbFloat { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(40px, 40px) scale(1.05); } }
+
+        /* --- SIDEBAR --- */
+        .glass-sidebar {
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); border-right: 1px solid var(--border);
+            height: 100vh; position: fixed; left: 0; top: 0; width: 90px; z-index: 50;
+            display: flex; flex-direction: column; padding: 1.5rem 0.8rem; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden; white-space: nowrap;
+        }
+        .glass-sidebar:hover { width: 280px; background: rgba(0, 0, 0, 0.85); }
+        .sidebar-text { opacity: 0; transform: translateX(-10px); transition: all 0.3s ease; margin-left: 1rem; }
+        .glass-sidebar:hover .sidebar-text { opacity: 1; transform: translateX(0); transition-delay: 0.1s; }
+        
+        .logo-text-expand { opacity: 0; display: inline-block; max-width: 0; overflow: hidden; transition: all 0.4s; transform: translateX(-5px); }
+        .glass-sidebar:hover .logo-text-expand { opacity: 1; max-width: 100px; transform: translateX(0); }
+
+        .nav-item { display: flex; align-items: center; padding: 12px; border-radius: 12px; color: #94a3b8; transition: all 0.3s; }
+        .nav-item:hover { background: rgba(255, 255, 255, 0.08); color: white; box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); }
+
+        /* --- CARDS --- */
+        .neon-card {
+            background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem;
+            transition: all 0.4s ease; position: relative; backdrop-filter: blur(10px);
+        }
+        .neon-card:hover { transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.3); box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5); }
+        .glow-blue:hover { border-color: var(--blue); box-shadow: 0 0 30px rgba(0, 243, 255, 0.15); }
+        .glow-gold:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(255, 215, 0, 0.15); }
+        .glow-purple:hover { border-color: var(--purple); box-shadow: 0 0 30px rgba(188, 19, 254, 0.15); }
+        .glow-red:hover { border-color: var(--red); box-shadow: 0 0 30px rgba(255, 0, 85, 0.15); }
+        .glow-green:hover { border-color: var(--green); box-shadow: 0 0 30px rgba(0, 255, 157, 0.15); }
+
+        /* --- UTILS --- */
+        .member-row { padding: 12px 16px; border-radius: 8px; transition: 0.3s; border-left: 2px solid transparent; display: flex; align-items: center; gap: 12px; }
+        .member-akkshhej:hover { background: rgba(0, 243, 255, 0.1); border-left-color: var(--blue); color: var(--blue); }
+        .member-divyansh:hover { background: rgba(188, 19, 254, 0.1); border-left-color: var(--purple); color: var(--purple); }
+        .member-giriraj:hover { background: rgba(255, 215, 0, 0.1); border-left-color: var(--gold); color: var(--gold); }
+        
+        /* UPDATED: Renamed class for Vansh and changed color to Beige (#f5f5dc) */
+        .member-vansh:hover { background: rgba(245, 245, 220, 0.1); border-left-color: #f5f5dc; color: #f5f5dc; }
+        
+        .member-akshat:hover { background: rgba(0, 255, 157, 0.1); border-left-color: var(--green); color: var(--green); }
+
+        #progressBar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--purple), var(--gold)); z-index: 100; width: 0%; }
+        .page-break { page-break-before: always; }
+        @media print { 
+            .nebula-container, .glass-sidebar, #progressBar { display: none !important; }
+            main { margin: 0 !important; padding: 0 !important; }
+            body { background: white !important; color: black !important; }
+            .neon-card { border: 1px solid #ddd !important; background: none !important; box-shadow: none !important; margin-bottom: 20px; page-break-inside: avoid; }
+            h1, h2, h3, h4 { color: black !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progressBar"></div>
+    <div class="nebula-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav class="glass-sidebar no-print group">
+        <div class="mb-10 pl-5 flex flex-col justify-center h-14">
+            <h2 class="text-3xl font-bold text-white cinzel leading-none tracking-wide">
+                U<span class="logo-text-expand">PES</span>
+            </h2>
+            <p class="text-[10px] text-gray-400 uppercase tracking-widest sidebar-text" style="margin-left: 0; margin-top: 4px;">Digital Business</p>
+        </div>
+        
+        <div class="flex flex-col gap-2 flex-grow">
+            <a href="#cover" class="nav-item"><i class="fas fa-home w-6 text-center text-lg"></i> <span class="sidebar-text">Cover</span></a>
+            <a href="#intro" class="nav-item"><i class="fas fa-book-open w-6 text-center text-lg"></i> <span class="sidebar-text">1. Introduction</span></a>
+            <a href="#background" class="nav-item"><i class="fas fa-history w-6 text-center text-lg"></i> <span class="sidebar-text">2. Background</span></a>
+            <a href="#patterns" class="nav-item"><i class="fas fa-chart-line w-6 text-center text-lg"></i> <span class="sidebar-text">3. Trade Patterns</span></a>
+            <a href="#winners" class="nav-item"><i class="fas fa-balance-scale w-6 text-center text-lg"></i> <span class="sidebar-text">4. Winners & Losers</span></a>
+            <a href="#implications" class="nav-item"><i class="fas fa-building w-6 text-center text-lg"></i> <span class="sidebar-text">5. Implications</span></a>
+            <a href="#case" class="nav-item text-blue-400"><i class="fas fa-gavel w-6 text-center text-lg"></i> <span class="sidebar-text">6. Case Studies</span></a>
+            <a href="#policy" class="nav-item"><i class="fas fa-exclamation-triangle w-6 text-center text-lg"></i> <span class="sidebar-text">7. Policy Challenges</span></a>
+            <a href="#conclusion" class="nav-item"><i class="fas fa-flag-checkered w-6 text-center text-lg"></i> <span class="sidebar-text">8. Conclusion</span></a>
+        </div>
+        
+        <button onclick="window.print()" class="mt-auto flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(0,243,255,0.4)] transition overflow-hidden">
+            <i class="fas fa-print w-6 text-center"></i>
+            <span class="sidebar-text whitespace-nowrap">Print PDF</span>
+        </button>
+    </nav>
+
+    <main class="ml-0 pl-[90px] w-full transition-all duration-300">
+        <div class="max-w-6xl mx-auto p-8 lg:p-20">
+
+            <section id="cover" class="min-h-[90vh] flex flex-col justify-center relative border-b border-white/5 mb-24">
+                
+                <a href="https://akhai003.github.io/UPES-Digital-Business-GCB-Aditya-Agarwal-590012408-Term-Paper/REPORT.html" target="_blank" class="absolute top-5 right-5 md:top-10 md:right-10 z-50 group">
+                    <div class="relative px-6 py-3 bg-black/40 backdrop-blur-md border border-blue-500/30 rounded-full flex items-center gap-3 hover:border-blue-400 hover:bg-blue-500/10 transition-all duration-300 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                        
+                        <span class="relative flex h-3 w-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                        </span>
+
+                        <span class="text-sm font-bold text-blue-200 group-hover:text-white tracking-widest cinzel transition-colors">
+                            View Full Report
+                        </span>
+                        
+                        <i class="fas fa-external-link-alt text-blue-400 text-xs group-hover:rotate-45 transition-transform duration-300"></i>
+                    </div>
+                </a>
+
+                <div class="animate__animated animate__fadeInDown">
+                    <img src="https://i.ibb.co/7drwwn6R/11021355.jpg" alt="UPES Logo" class="w-24 mb-8 rounded-lg border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                    
+                    <h2 class="text-3xl font-bold text-white mb-6 cinzel tracking-wide block">BBA Digital Business</h2>
+
+                    <div class="inline-block px-4 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold tracking-[0.2em] uppercase mb-8">
+                        Term Paper • Odd Semester 2025
+                    </div>
+                    <h1 class="text-6xl lg:text-8xl font-bold text-white leading-[1.1] mb-8 cinzel">
+                        The Collapse of<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-gold">Multilateralism</span>
+                    </h1>
+                    <p class="text-xl text-gray-400 font-light max-w-3xl leading-relaxed">
+                        A Strategic Analysis of GATT, GATS, and TRIPS in the Age of Geoeconomic Fragmentation.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mt-24 animate__animated animate__fadeInUp animate__delay-1s">
+                    <div>
+                        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6">Research By</h3>
+                        <div class="space-y-1">
+                            <div class="member-row member-vansh"><i class="fas fa-user-astronaut text-sm opacity-50"></i> <span class="text-lg">Vansh Mehta - 590019192</span></div>
+                        </div>
+                    </div>
+                    <div class="md:text-right">
+                        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6">Submitted To</h3>
+                        <p class="text-4xl font-bold text-white mb-2 cinzel prof-animate cursor-default">Prof. Shreya Nupur</p>
+                        <p class="text-gray-400">PhD • School of Business</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="page-break"></div>
+
+            <section id="intro" class="mb-32">
+                <h2 class="text-4xl font-bold text-white mb-12 cinzel flex items-end gap-4 heading-glow">
+                    <span class="text-6xl text-white/10 font-sans">01</span> Introduction
+                </h2>
+                <div class="neon-card glow-blue mb-12" data-tilt>
+                    <p class="text-lg text-gray-300 mb-6 text-justify">
+                        The global trading system is currently undergoing its most significant stress test since the founding of the General Agreement on Tariffs and Trade (GATT) in 1947. We have transitioned from an era of "Hyper-Globalization" to an era of "Geoeconomic Fragmentation."
+                    </p>
+                    <p class="text-lg text-gray-300 text-justify">
+                        The World Trade Organization (WTO), established on January 1, 1995, represents the culmination of efforts to create a binding, rules-based international order. However, the paralysis of the WTO Appellate Body has led to a regression from a rules-based system to a power-based system. This paper analyzes this shift through the lens of three core agreements: GATT (Goods), GATS (Services), and TRIPS (Intellectual Property).
+                    </p>
+                </div>
+            </section>
+
+            <section id="background" class="mb-32">
+                <div class="flex items-center justify-between mb-12">
+                    <h2 class="text-4xl font-bold text-white cinzel heading-glow">
+                        <span class="text-6xl text-white/10 font-sans">02</span> Background of Agreement
+                    </h2>
+                    <div class="h-px bg-white/10 flex-grow ml-8"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 mb-16">
+                    <div class="space-y-6 text-gray-300 text-justify text-lg">
+                        <p>Unlike the provisional <strong>GATT 1947</strong>, the WTO is a permanent institution with legal personality. Its founding principle is the "Single Undertaking" — nothing is agreed until everything is agreed.</p>
+                        <div class="pl-6 border-l-2 border-blue-500 py-2 my-6 bg-blue-500/5 rounded-r">
+                            <p class="text-white font-medium italic">"The Single Undertaking"</p>
+                            <p class="text-sm text-gray-400 mt-1">A country cannot sign up for GATT (to export shirts) without also signing up for TRIPS (protecting patents) and GATS (opening banking sectors).</p>
+                        </div>
+                    </div>
+                    <div class="neon-card flex flex-col justify-center bg-gradient-to-br from-white/5 to-transparent">
+                        <h3 class="text-xl font-bold text-white mb-8 text-center cinzel">The Three Pillars</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition">
+                                <div class="w-10 h-10 bg-blue-500 rounded flex items-center justify-center font-bold text-white">1</div>
+                                <div><strong class="text-white block">GATT</strong> <span class="text-gray-400 text-sm">Merchandise Goods</span></div>
+                            </div>
+                            <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition">
+                                <div class="w-10 h-10 bg-gold rounded flex items-center justify-center font-bold text-black">2</div>
+                                <div><strong class="text-white block">GATS</strong> <span class="text-gray-400 text-sm">Services (IT, Finance)</span></div>
+                            </div>
+                            <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition">
+                                <div class="w-10 h-10 bg-purple-500 rounded flex items-center justify-center font-bold text-white">3</div>
+                                <div><strong class="text-white block">TRIPS</strong> <span class="text-gray-400 text-sm">IP (Patents)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="page-break"></div>
+
+            <section id="patterns" class="mb-32">
+                <h2 class="text-4xl font-bold text-white mb-12 cinzel flex items-end gap-4 heading-glow">
+                    <span class="text-6xl text-white/10 font-sans">03</span> Trade Patterns Before & After
+                </h2>
+
+                <div class="text-gray-300 text-justify mb-12 space-y-4 text-lg">
+                    <p>Post-1995, global trade volume exploded due to the predictability offered by the WTO. However, post-2015, we are witnessing a "Stagnation of Trade Liberalization." Tariffs are no longer falling; they are rising under the guise of National Security and Environmental Protection (e.g., Carbon Taxes).</p>
+                </div>
+
+                <div class="neon-card glow-blue mb-16">
+                    <h3 class="text-xl font-bold text-white mb-4">Global Trade Volume Stagnation (Index)</h3>
+                    <div class="h-[300px] w-full">
+                        <canvas id="tradeChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="winners" class="mb-32">
+                <h2 class="text-4xl font-bold text-white mb-12 cinzel flex items-end gap-4 heading-glow">
+                    <span class="text-6xl text-white/10 font-sans">04</span> Winners and Losers
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="neon-card glow-green border-t-4 border-green-500">
+                        <h3 class="text-2xl font-bold text-green-400 mb-4"><i class="fas fa-trophy mr-2"></i> The Winners</h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li>
+                                <strong class="text-white">Developed Nations (EU/US):</strong> Through the Agreement on Agriculture (AoA), they successfully protected their farmers using the "Green Box" subsidies while restricting developing nations.
+                            </li>
+                            <li>
+                                <strong class="text-white">Big Tech:</strong> The GATS moratorium on electronic transmissions has allowed tech giants to export software and digital services duty-free globally.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="neon-card glow-red border-t-4 border-red-500">
+                        <h3 class="text-2xl font-bold text-red-400 mb-4"><i class="fas fa-arrow-down mr-2"></i> The Losers</h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li>
+                                <strong class="text-white">Developing Nations (India):</strong> The "Amber Box" restrictions in AoA limit India's ability to offer Minimum Support Price (MSP) for food security.
+                            </li>
+                            <li>
+                                <strong class="text-white">Generic Manufacturers:</strong> TRIPS product patent rules delayed the entry of affordable generic medicines, impacting public health in the Global South.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <div class="page-break"></div>
+
+            <section id="implications" class="mb-32">
+                <h2 class="text-4xl font-bold text-white mb-12 cinzel flex items-end gap-4 heading-glow">
+                    <span class="text-6xl text-white/10 font-sans">05</span> Implications for Businesses
+                </h2>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="neon-card glow-blue p-8">
+                        <h3 class="text-xl font-bold text-blue-400 mb-4"><i class="fas fa-link mr-2"></i> Supply Chain Resilience</h3>
+                        <p class="text-gray-400 text-sm text-justify">
+                            The WTO's MFN protection is eroding. Managers must shift from "Just-in-Time" efficiency to "Just-in-Case" resilience. The <strong>China + 1</strong> strategy is now a risk management necessity.
+                        </p>
+                    </div>
+                    <div class="neon-card glow-green p-8">
+                        <h3 class="text-xl font-bold text-green-400 mb-4"><i class="fas fa-leaf mr-2"></i> Green Compliance</h3>
+                        <p class="text-gray-400 text-sm text-justify">
+                            The EU's Carbon Border Tax will tax Indian Steel & Aluminum. Exporters must implement carbon accounting immediately or face a 25% penalty.
+                        </p>
+                    </div>
+                    <div class="neon-card glow-purple p-8">
+                        <h3 class="text-xl font-bold text-purple-400 mb-4"><i class="fas fa-database mr-2"></i> Data Localization</h3>
+                        <p class="text-gray-400 text-sm text-justify">
+                            With Digital Sovereignty rising, data flows are restricted. Firms must use local cloud zones (AWS Mumbai) to comply with India's DPDP Act.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="case" class="mb-32">
+                <h2 class="text-4xl font-bold text-white mb-12 cinzel flex items-end gap-4 heading-glow">
+                    <span class="text-6xl text-white/10 font-sans">06</span> Case Studies of Companies
+                </h2>
+
+                <div class="neon-card glow-blue p-10 border-l-4 border-blue-500" data-tilt>
+                    <span class="bg-blue-500/20 text-blue-400 font-bold px-3 py-1 rounded text-xs uppercase tracking-widest mb-4 inline-block">ICT Sector Impact</span>
+                    <h3 class="text-3xl font-bold text-white mb-6">Case Study: Mobile Manufacturing (DS582)</h3>
+                    <p class="text-lg text-gray-300 mb-6 italic">"How Apple, Samsung, and Xiaomi are navigating India's Import Tariffs"</p>
+
+                    <div class="space-y-6 text-gray-300 text-justify">
+                        <div>
+                            <h4 class="text-xl font-bold text-blue-400 mb-2">The Policy Shift</h4>
+                            <p>To support the "Make in India" (PLI) scheme, India imposed 20% customs duties on imported smartphones. The EU sued India at the WTO (DS582), arguing this violated the ITA-1 agreement.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-blue-400 mb-2">Impact on Firms</h4>
+                            <p>The tariffs forced global giants like <strong>Apple</strong> and <strong>Samsung</strong> to shift assembly to India (e.g., Foxconn plants in Tamil Nadu) to avoid the 20% duty. This validates the "Tariff-Jumping FDI" theory.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-red-400 mb-2">The Outcome</h4>
+                            <p>Although the WTO ruled against India in 2023, India appealed to a non-functional Appellate Body. This strategic maneuver allows the tariffs to remain, protecting the domestic manufacturing ecosystem of companies like <strong>Dixon Technologies</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="page-break"></div>
+
+            <section id="policy" class="mb-32">
+                <h2 class="text-4xl font-bold text-white mb-12 cinzel flex items-end gap-4 heading-glow">
+                    <span class="text-6xl text-white/10 font-sans">07</span> Policy Challenges & Criticisms
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="neon-card glow-purple">
+                        <h3 class="text-xl font-bold text-white mb-4">1. The TRIPS Inequity</h3>
+                        <p class="text-sm text-gray-400 mb-4">The most significant criticism of the WTO is its handling of the Covid-19 pandemic. India & South Africa proposed a waiver of IP rights to produce vaccines.</p>
+                        <div class="pl-4 border-l-2 border-purple-500">
+                            <p class="text-white font-bold">The Failure:</p>
+                            <p class="text-sm text-gray-400">The EU/UK blocked the waiver to protect pharma profits. A watered-down deal was reached in 2022, widely criticized as "too little, too late."</p>
+                        </div>
+                    </div>
+
+                    <div class="neon-card glow-gold">
+                        <h3 class="text-xl font-bold text-white mb-4">2. The Digital Fiscal Cliff</h3>
+                        <p class="text-sm text-gray-400 mb-4">Since 1998, the WTO has banned tariffs on digital transmissions. This moratorium expires in 2026.</p>
+                        <div class="pl-4 border-l-2 border-gold">
+                            <p class="text-white font-bold">The Challenge:</p>
+                            <p class="text-sm text-gray-400">Developing nations lose billions in revenue as trade shifts from physical goods (taxable) to digital downloads (tax-free). India is leading the block to end this moratorium.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 neon-card glow-blue p-6">
+                    <h4 class="text-center text-white mb-4">Shift to Digital Services Trade</h4>
+                    <div class="h-[250px] w-full">
+                        <canvas id="servicesChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="conclusion" class="mb-32">
+                <h2 class="text-4xl font-bold text-white mb-12 cinzel flex items-end gap-4 heading-glow">
+                    <span class="text-6xl text-white/10 font-sans">08</span> Conclusion & Recommendations
+                </h2>
+
+                <div class="p-8 bg-white/5 rounded-2xl border-l-4 border-gold mb-12">
+                    <p class="text-xl text-gray-300 leading-relaxed text-justify italic">
+                        "The World Trade Organization is not dead, but it is dormant. We have transitioned from an era of <strong>Global Integration</strong> to an era of <strong>Geopolitical Fragmentation</strong>. The strategy for the next decade is not free trade, but managed trade."
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="p-6 border border-white/10 rounded hover:bg-white/5 transition">
+                        <h4 class="text-gold font-bold mb-2 text-lg">Managerial Rec 1</h4>
+                        <p class="text-sm text-gray-400">Leverage bilateral FTAs (like India-UAE CEPA) for market access rather than relying on WTO MFN rates.</p>
+                    </div>
+                    <div class="p-6 border border-white/10 rounded hover:bg-white/5 transition">
+                        <h4 class="text-blue-400 font-bold mb-2 text-lg">Managerial Rec 2</h4>
+                        <p class="text-sm text-gray-400">Diversify sourcing immediately. The era of single-source efficiency (China) is over; risk mitigation is key.</p>
+                    </div>
+                    <div class="p-6 border border-white/10 rounded hover:bg-white/5 transition">
+                        <h4 class="text-purple-400 font-bold mb-2 text-lg">Managerial Rec 3</h4>
+                        <p class="text-sm text-gray-400">Prepare for Non-Tariff Barriers. Compliance with ESG and Carbon norms will be the new "Visa" for exports.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="page-break"></div>
+
+            <section id="references" class="mb-24 border-t border-white/10 pt-20">
+                <h2 class="text-3xl font-bold text-white cinzel mb-12">References & Bibliography</h2>
+                
+                <div class="grid md:grid-cols-1 gap-8">
+                    <div class="neon-card glow-blue" data-tilt>
+                        <h4 class="text-xl font-bold text-blue-400 mb-6 cinzel flex items-center gap-3">
+                            <i class="fas fa-database text-lg"></i> Primary Data Sources
+                        </h4>
+                        <ul class="space-y-4 text-gray-300 font-light text-sm">
+                            <li class="pl-4 border-l-2 border-blue-500/30 hover:border-blue-400 transition-colors">
+                                <strong>WTO. (2024).</strong> <em>World Trade Statistical Review 2024</em>. Geneva: World Trade Organization.
+                            </li>
+                            <li class="pl-4 border-l-2 border-blue-500/30 hover:border-blue-400 transition-colors">
+                                <strong>UNCTAD. (2024).</strong> <em>World Investment Report 2024</em>. United Nations.
+                            </li>
+                            <li class="pl-4 border-l-2 border-blue-500/30 hover:border-blue-400 transition-colors">
+                                <strong>World Bank. (2025).</strong> <em>WITS (World Integrated Trade Solution) Database: India Country Profile</em>.
+                            </li>
+                            <li class="pl-4 border-l-2 border-blue-500/30 hover:border-blue-400 transition-colors">
+                                <strong>Ministry of Commerce & Industry, Govt. of India. (2024).</strong> <em>Annual Report 2023-24</em>.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="neon-card glow-purple" data-tilt>
+                        <h4 class="text-xl font-bold text-purple-400 mb-6 cinzel flex items-center gap-3">
+                            <i class="fas fa-gavel text-lg"></i> Legal Texts & Disputes
+                        </h4>
+                        <ul class="space-y-4 text-gray-300 font-light text-sm">
+                            <li class="pl-4 border-l-2 border-purple-500/30 hover:border-purple-400 transition-colors">
+                                <strong>WTO. (1994).</strong> <em>Marrakesh Agreement Establishing the World Trade Organization</em>.
+                            </li>
+                            <li class="pl-4 border-l-2 border-purple-500/30 hover:border-purple-400 transition-colors">
+                                <strong>Panel Report. (2023).</strong> <em>India — Tariff Treatment on Certain Goods in the Information and Communications Technology Sector (WT/DS582)</em>.
+                            </li>
+                            <li class="pl-4 border-l-2 border-purple-500/30 hover:border-purple-400 transition-colors">
+                                <strong>Supreme Court of India. (2013).</strong> <em>Novartis AG v. Union of India & Others</em>. Civil Appeal No. 2706-2716.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="neon-card glow-gold" data-tilt>
+                        <h4 class="text-xl font-bold text-gold mb-6 cinzel flex items-center gap-3">
+                            <i class="fas fa-book text-lg"></i> Academic & Periodical Sources
+                        </h4>
+                        <ul class="space-y-4 text-gray-300 font-light text-sm">
+                            <li class="pl-4 border-l-2 border-gold/30 hover:border-gold transition-colors">
+                                <strong>Baldwin, R. (2016).</strong> <em>The Great Convergence: Information Technology and the New Globalization</em>. Belknap Press.
+                            </li>
+                            <li class="pl-4 border-l-2 border-gold/30 hover:border-gold transition-colors">
+                                <strong>Okonjo-Iweala, N. (2024).</strong> "Re-globalization: Trade for the Many." <em>Foreign Affairs</em>.
+                            </li>
+                            <li class="pl-4 border-l-2 border-gold/30 hover:border-gold transition-colors">
+                                <strong>Rodrik, D. (2018).</strong> <em>Straight Talk on Trade: Ideas for a Sane World Economy</em>. Princeton University Press.
+                            </li>
+                            <li class="pl-4 border-l-2 border-gold/30 hover:border-gold transition-colors">
+                                <strong>Subramanian, A., & Kessler, M. (2013).</strong> "The Hyperglobalization of Trade and Its Future." <em>Peterson Institute for International Economics</em>.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="text-center text-gray-600 text-sm pb-12">
+                UPES BBA Digital Business • Final Term Paper Submission • Dec 2025
+            </footer>
+
+        </div>
+    </main>
+
+    <script>
+        // --- 1. VANILLA TILT INIT ---
+        VanillaTilt.init(document.querySelectorAll(".neon-card"), { max: 5, speed: 400, glare: true, "max-glare": 0.1 });
+
+        // --- 2. SCROLL PROGRESS BAR ---
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+
+        // --- 3. CHART CONFIG ---
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { grid: { display: false, color: '#333' }, ticks: { color: '#94a3b8' } }, y: { grid: { color: '#333' }, ticks: { color: '#94a3b8' } } }
+        };
+
+        new Chart(document.getElementById('tradeChart'), {
+            type: 'line',
+            data: {
+                labels: ['2012', '2014', '2016', '2018', '2020', '2022', '2024'],
+                datasets: [{
+                    label: 'Trade Vol',
+                    data: [100, 112, 114, 120, 115, 128, 130],
+                    borderColor: '#3B82F6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById('servicesChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2015', '2018', '2021', '2024'],
+                datasets: [
+                    { label: 'Services', data: [155, 205, 240, 345], backgroundColor: '#E2B340', borderRadius: 4 },
+                    { label: 'Goods', data: [260, 300, 390, 435], backgroundColor: '#334155', borderRadius: 4 }
+                ]
+            },
+            options: commonOptions
+        });
+    </script>
+</body>
+</html>

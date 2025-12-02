@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WTO Multilateral Agreements - Comprehensive Project Report</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Oswald:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --primary: #0f172a; /* Deep Navy */
+            --accent: #2563eb; /* Royal Blue */
+            --gold: #d97706; /* Professional Gold */
+            --text: #334155; /* Slate Gray */
+            --bg-screen: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-screen);
+            font-family: 'Merriweather', serif;
+            color: var(--text);
+            line-height: 1.8;
+            padding: 40px 0;
+        }
+
+        /* --- UI BUTTONS (SCREEN ONLY) --- */
+        .print-fab {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            background: white; color: var(--primary);
+            padding: 12px 24px; border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-family: 'Oswald', sans-serif; font-weight: bold;
+            cursor: pointer; border: 2px solid var(--primary);
+            transition: all 0.2s;
+            text-decoration: none; display: flex; align-items: center; gap: 10px;
+        }
+        .print-fab:hover { background: var(--primary); color: white; }
+
+        /* --- A4 PAPER LAYOUT --- */
+        .page {
+            width: 210mm;
+            min-height: 297mm; /* A4 Height */
+            padding: 25mm; /* Standard Academic Margins */
+            margin: 0 auto 30px auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4, h5 { font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--primary); }
+        
+        h1 { font-size: 2.8rem; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -1px; }
+        h2 { font-size: 1.5rem; border-bottom: 2px solid var(--gold); padding-bottom: 8px; margin-bottom: 1.5rem; margin-top: 0; color: var(--primary); }
+        h3 { font-size: 1.1rem; color: var(--accent); margin-top: 1.5rem; margin-bottom: 0.8rem; font-weight: 600; }
+        h4 { font-size: 1rem; color: var(--text); font-weight: bold; margin-bottom: 0.5rem; margin-top: 1rem; text-decoration: underline; text-decoration-color: #e2e8f0; }
+        
+        p { margin-bottom: 1rem; font-size: 10.5pt; text-align: justify; }
+        ul, ol { margin-bottom: 1rem; margin-left: 1.8rem; font-size: 10.5pt; }
+        li { margin-bottom: 0.5rem; text-align: justify; }
+        
+        blockquote {
+            border-left: 4px solid var(--gold);
+            padding-left: 15px;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #475569;
+            background: #fffbeb;
+            padding: 15px;
+        }
+
+        /* --- COMPONENTS --- */
+        .header-strip {
+            position: absolute; top: 0; left: 0; width: 100%; height: 5mm;
+            background: var(--primary);
+        }
+        
+        .footer-strip {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 5mm;
+            background: var(--primary);
+        }
+
+        .page-number {
+            position: absolute; bottom: 10mm; right: 25mm;
+            font-family: 'Oswald', sans-serif; color: #94a3b8; font-size: 9pt;
+        }
+
+        .cover-content { display: flex; flex-direction: column; justify-content: center; height: 100%; }
+        .logo-img { width: 140px; margin-bottom: 2rem; }
+        
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 10pt; }
+        .data-table th { background: var(--primary); color: white; padding: 10px; text-align: left; font-family: 'Oswald'; font-weight: 300; }
+        .data-table td { border: 1px solid #e2e8f0; padding: 10px; vertical-align: top; }
+        .data-table tr:nth-child(even) { background: #f8fafc; }
+
+        /* Charts */
+        .chart-container { height: 250px; width: 100%; margin: 2rem 0; border: 1px solid #e2e8f0; padding: 10px; }
+        .caption { font-size: 9pt; color: #64748b; text-align: center; margin-top: -10px; margin-bottom: 20px; font-style: italic; }
+
+        /* --- PRINT MEDIA QUERY --- */
+        @media print {
+            body { background: none; padding: 0; -webkit-print-color-adjust: exact; }
+            .print-fab { display: none; }
+            .page { margin: 0; box-shadow: none; border: none; width: 100%; page-break-after: always; min-height: 297mm; height: 297mm; padding: 25mm; }
+            h2 { margin-top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <button onclick="window.print()" class="print-fab">
+        <i class="fas fa-print"></i> Print Report
+    </button>
+
+    <div class="page">
+        <div class="header-strip"></div>
+        <div class="cover-content">
+            <div style="text-align: center;">
+                <img src="https://i.ibb.co/7drwwn6R/11021355.jpg" alt="UPES Logo" class="logo-img">
+                
+                <div style="font-family: 'Oswald'; font-size: 14pt; letter-spacing: 3px; color: var(--primary); margin-bottom: 10px;">
+                    PROJECT REPORT
+                </div>
+                
+                <div style="font-family: 'Merriweather'; font-size: 11pt; color: #64748b; margin-bottom: 3rem;">
+                    Global Context of Business (HSEG 2001)
+                </div>
+
+                <h1>STRATEGIC ANALYSIS OF<br><span style="color: var(--accent);">WTO MULTILATERAL AGREEMENTS</span></h1>
+                <h3 style="color: var(--text); margin-top: 0;">(GATT, GATS, TRIPS)</h3>
+                
+                <p style="text-align: center; margin-top: 2rem; color: #475569; font-size: 12pt; max-width: 80%;">
+                    A comprehensive study on the structural shifts from rules-based integration to geoeconomic fragmentation and its implications for global business strategy.
+                </p>
+            </div>
+
+            <div style="margin-top: auto; display: flex; justify-content: space-between; border-top: 2px solid #e2e8f0; padding-top: 2rem;">
+                <div>
+                    <h4 style="color: #94a3b8; margin-bottom: 10px;">SUBMITTED BY</h4>
+                    <ul style="list-style: none; margin: 0; padding: 0; font-family: 'Oswald';">
+                        <li><strong>Vansh Mehta - 590019192</strong></li>
+                        <li style="font-family: 'Merriweather', serif; font-size: 10pt; margin-top: 5px; color: var(--text);">
+                            BBA • Digital Business • School of Business<br>
+                            2nd Yr
+                        </li>
+                    </ul>
+                </div>
+                <div style="text-align: right;">
+                    <h4 style="color: #94a3b8; margin-bottom: 10px;">SUBMITTED TO</h4>
+                    <div style="font-size: 14pt; font-weight: bold; color: var(--primary);">Prof. Shreya Nupur</div>
+                    <div style="font-size: 10pt;">PhD • School of Business</div>
+                    <div style="font-size: 10pt; margin-top: 10px; color: #64748b;">December 02, 2025</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-strip"></div>
+    </div>
+
+    <div class="page">
+        <div class="page-number">Page 2</div>
+        
+        <h2>1. Introduction</h2>
+        <p>The post-World War II economic order was built on a simple premise: trade promotes peace. For seventy years, the multilateral trading system, underpinned first by the General Agreement on Tariffs and Trade (GATT) and later by the World Trade Organization (WTO), facilitated an era of unprecedented prosperity and globalization. However, the global trading landscape in the 2020s stands at a critical juncture, characterized by rising protectionism, supply chain weaponization, and a retreat from multilateralism.</p>
+        
+        <p>This project report conducts a comprehensive analysis of the three pillars of the WTO—GATT (Goods), GATS (Services), and TRIPS (Intellectual Property). It moves beyond a theoretical understanding to analyze the practical, strategic implications for businesses operating in an increasingly fragmented world.</p>
+
+        <h3>1.1 Objective of the Study</h3>
+        <p>The primary objective is to evaluate the shift from a "rules-based" order to a "power-based" order and its impact on corporate strategy. Specifically, this report aims to:</p>
+        <ul>
+            <li>Analyze the structural framework of GATT, GATS, and TRIPS.</li>
+            <li>Examine trade patterns before and after the establishment of the WTO.</li>
+            <li>Identify the "Winners and Losers" of the globalization era.</li>
+            <li>Provide actionable strategic recommendations for managers in the face of policy challenges like the Digital Fiscal Cliff and TRIPS inequities.</li>
+        </ul>
+
+        <h3>1.2 Methodology & Data Sources</h3>
+        <p>This report utilizes secondary data analysis. Quantitative data regarding trade volumes and tariff lines are sourced from the <strong>WTO Statistics Database</strong> and <strong>World Bank WITS</strong>. Qualitative analysis of disputes and policy shifts is derived from WTO Panel Reports, UNCTAD publications, and Ministry of Commerce (Government of India) policy briefs.</p>
+    </div>
+
+    <div class="page">
+        <div class="page-number">Page 3</div>
+
+        <h2>2. Background of Selected Trade Agreements</h2>
+        <p>The WTO is not merely an extension of GATT; it is a distinct legal entity established by the <strong>Marrakesh Agreement</strong> on January 1, 1995. Unlike the provisional nature of GATT 1947, the WTO requires members to adhere to the "Single Undertaking" principle—meaning a country cannot cherry-pick agreements. It must accept the entire package of GATT, GATS, and TRIPS.</p>
+
+        <h3>2.1 General Agreement on Tariffs and Trade (GATT 1994)</h3>
+        <p>GATT remains the bedrock of merchandise trade. It operates on two fundamental non-discrimination principles:</p>
+        <ol>
+            <li><strong>Most-Favored-Nation (MFN) Treatment (Article I):</strong> Favor one, favor all. A tariff reduction granted to one partner must be extended to all WTO members immediately and unconditionally.</li>
+            <li><strong>National Treatment (Article III):</strong> Imported goods, once they have entered the market, must be treated no less favorably than like domestic products (e.g., in terms of internal taxes or regulations).</li>
+        </ol>
+
+        <h3>2.2 General Agreement on Trade in Services (GATS)</h3>
+        <p>Recognizing the shift toward a service economy, GATS was introduced in 1995. It defines trade in services through four "Modes of Supply":</p>
+        <table class="data-table">
+            <tr>
+                <th>Mode</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><strong>Mode 1: Cross-Border</strong></td>
+                <td>Service flows from one member to another digitally.</td>
+                <td>An Indian IT firm debugging code for a US bank.</td>
+            </tr>
+            <tr>
+                <td><strong>Mode 2: Consumption Abroad</strong></td>
+                <td>Consumer moves to the service provider's country.</td>
+                <td>A US patient traveling to Thailand for surgery (Medical Tourism).</td>
+            </tr>
+            <tr>
+                <td><strong>Mode 3: Commercial Presence</strong></td>
+                <td>Service provider establishes a physical entity abroad.</td>
+                <td>SBI opening a branch in London.</td>
+            </tr>
+            <tr>
+                <td><strong>Mode 4: Natural Persons</strong></td>
+                <td>Movement of individuals to provide service.</td>
+                <td>An Indian software engineer on an H-1B visa.</td>
+            </tr>
+        </table>
+
+        <h3>2.3 Trade-Related Aspects of Intellectual Property Rights (TRIPS)</h3>
+        <p>TRIPS integrated IP rights into the global trading system for the first time. It mandates minimum standards for regulation of patents (20 years), copyrights (50+ years), and trademarks. Crucially for developing nations, it forced a shift from "Process Patents" to "Product Patents," significantly impacting the pharmaceutical sector.</p>
+    </div>
+
+    <div class="page">
+        <div class="page-number">Page 4</div>
+
+        <h2>3. Trade Patterns Before and After</h2>
+        
+        <h3>3.1 The Era of Hyper-Globalization (1995–2008)</h3>
+        <p>Following the establishment of the WTO, the world witnessed an explosion in trade volumes. Average applied tariffs in developing countries dropped from over 25% in the late 1980s to below 10% by 2010. This period was defined by the unbundling of supply chains, where production was fragmented across borders to maximize efficiency (e.g., the iPhone supply chain).</p>
+
+        <h3>3.2 The Era of "Slowbalization" (2008–Present)</h3>
+        <p>Post-2008 Financial Crisis, and accelerating after 2016, trade patterns have shifted. The ratio of global trade to GDP has plateaued. We are witnessing a rise in "Non-Tariff Measures" (NTMs) such as sanitary standards, national security exceptions, and environmental compliance (Carbon Taxes).</p>
+
+        <div class="chart-container">
+            <canvas id="tradeChart"></canvas>
+        </div>
+        <div class="caption">Figure 1: Global Merchandise Trade Volume Index (Base 2015=100). Source: WTO Data.</div>
+
+        <p>As illustrated in Figure 1, while volume continues to grow, the rate has decelerated. More importantly, the composition of trade is changing. Trade in <strong>Digital Services</strong> (Mode 1) is growing 2x faster than trade in physical goods, driven by data flows and remote work technologies.</p>
+    </div>
+
+    <div class="page">
+        <div class="page-number">Page 5</div>
+
+        <h2>4. Winners and Losers</h2>
+        <p>The WTO regime has not created a level playing field. The benefits of liberalization have been unevenly distributed, creating distinct winners and losers across nations and sectors.</p>
+
+        <table class="data-table">
+            <tr>
+                <th style="width: 50%;">The Winners</th>
+                <th style="width: 50%;">The Losers</th>
+            </tr>
+            <tr>
+                <td>
+                    <strong>1. Developed Nations (EU/US):</strong><br>
+                    They successfully retained protection for their sensitive sectors (Agriculture) using "Green Box" subsidies in the Agreement on Agriculture (AoA), while forcing open markets for their industrial goods.
+                </td>
+                <td>
+                    <strong>1. Developing Nations (Global South):</strong><br>
+                    Countries like India are restricted by "Amber Box" limits, hampering their ability to offer Minimum Support Price (MSP) for food security without facing legal challenges.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>2. Big Tech & IP Holders:</strong><br>
+                    Companies like Microsoft, Pfizer, and Apple benefited immensely from TRIPS (IP protection) and the GATS Moratorium on electronic transmissions (tax-free digital trade).
+                </td>
+                <td>
+                    <strong>2. Generic Drug Manufacturers:</strong><br>
+                    The shift to product patents delayed the entry of affordable generics. Small manufacturing firms in LDCs also struggled against subsidized imports.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>3. Emerging Economies (China/Vietnam):</strong><br>
+                    Nations that successfully integrated into Global Value Chains (GVCs) used WTO access to become the "factory of the world."
+                </td>
+                <td>
+                    <strong>3. Least Developed Countries (LDCs):</strong><br>
+                    Many African nations relying on commodity exports saw terms of trade deteriorate and failed to industrialize despite market access.
+                </td>
+            </tr>
+        </table>
+
+        <h3>4.1 The North-South Divide</h3>
+        <p>The central tension in the WTO remains the "North-South" divide. The Doha Development Round (launched in 2001) effectively failed because the Global North refused to cut agricultural subsidies, while the Global South refused to open markets for industrial goods and services without reciprocity.</p>
+    </div>
+
+    <div class="page">
+        <div class="page-number">Page 6</div>
+
+        <h2>5. Implications for Businesses</h2>
+        <p>The shifting sands of multilateral trade agreements have profound implications for corporate strategy. The era of assuming a flat, borderless world is over.</p>
+
+        <h3>5.1 From Efficiency to Resilience</h3>
+        <p>For decades, supply chain managers optimized for cost and speed (Just-in-Time). Under the new geopolitical reality, the priority must shift to resilience (Just-in-Case). The WTO's inability to curb unilateral tariffs (like the US-China trade war) means businesses can no longer rely on stable MFN rates.</p>
+        <blockquote>
+            "Strategy 2030 is not about the lowest cost; it is about the lowest risk. Diversification is the only insurance against geoeconomic fragmentation."
+        </blockquote>
+
+        <h3>5.2 The Rise of Non-Tariff Barriers (NTBs)</h3>
+        <p>Tariffs are visible and calculable. NTBs are opaque and costly. Businesses must now navigate a complex web of:</p>
+        <ul>
+            <li><strong>Environmental Standards:</strong> The EU's Carbon Border Adjustment Mechanism (CBAM) effectively taxes carbon-intensive imports. Indian steel and aluminum exporters must implement rigorous carbon accounting or lose market share.</li>
+            <li><strong>Labor Standards:</strong> Increasing scrutiny on labor practices in supply chains (e.g., forced labor bans) requires deep-tier visibility.</li>
+        </ul>
+
+        <h3>5.3 Data Localization & Digital Trade</h3>
+        <p>With the rise of "Digital Sovereignty," the free flow of data is being restricted. GATS Mode 1 is under threat. Companies must adopt a <strong>"Glocal" IT architecture</strong>—storing data locally (e.g., AWS Mumbai Region) to comply with national laws like India's DPDP Act, while maintaining global connectivity.</p>
+    </div>
+
+    <div class="page">
+        <div class="page-number">Page 7</div>
+
+        <h2>6. Case Studies of Companies</h2>
+
+        <h3>Case Study A: The Mobile Manufacturing Sector (DS582)</h3>
+        
+        <h4>Context</h4>
+        <p>To boost domestic manufacturing under the "Make in India" and Production Linked Incentive (PLI) schemes, the Indian government gradually raised import duties on mobile phones and components (up to 20%) starting in 2014.</p>
+
+        <h4>The Conflict</h4>
+        <p>The European Union, Japan, and Taiwan challenged these tariffs at the WTO (Dispute DS582). They argued that India had committed to 0% tariffs under the Information Technology Agreement (ITA-1) of 1996. India argued that "smartphones" did not exist in 1996 and thus were not covered by the agreement.</p>
+
+        <h4>Impact on Business Strategy</h4>
+        <p>The tariffs fundamentally altered the strategy of global giants:</p>
+        <ul>
+            <li><strong>Apple & Samsung:</strong> Faced with a 20% cost disadvantage on imports, these companies shifted assembly to India. Apple's contract manufacturers (Foxconn, Wistron) set up massive plants in Tamil Nadu and Karnataka.</li>
+            <li><strong>Result:</strong> India transitioned from a net importer to a major exporter of iPhones. This validates the theory of "Tariff-Jumping FDI"—where companies invest locally to bypass trade barriers.</li>
+        </ul>
+
+        <h4>Current Status (2025)</h4>
+        <p>In 2023, the WTO panel ruled against India. However, India appealed the ruling to the Appellate Body. Since the Appellate Body is non-functional (blocked by the US), the appeal sits in legal limbo. This allows India to maintain the tariffs indefinitely, securing the PLI scheme's success.</p>
+    </div>
+
+    <div class="page">
+        <div class="page-number">Page 8</div>
+
+        <h3>Case Study B: Novartis vs. Union of India (TRIPS)</h3>
+
+        <h4>Context</h4>
+        <p>When India joined the WTO, it had to amend its patent laws to comply with TRIPS, introducing "Product Patents" for pharmaceuticals in 2005. This threatened India's status as the "Pharmacy of the World," known for cheap generic drugs.</p>
+
+        <h4>The Strategy</h4>
+        <p>To protect public health, India introduced a unique safeguard: <strong>Section 3(d)</strong> of the Indian Patents Act. This clause prevents "evergreening"—the practice where pharma companies make minor, trivial changes to an existing drug to extend its patent life for another 20 years.</p>
+
+        <h4>The Corporate Conflict</h4>
+        <p>Swiss giant <strong>Novartis</strong> applied for a patent for <em>Glivec</em>, a life-saving cancer drug. The Indian patent office rejected it, citing Section 3(d)—Glivec was just a new form of a known substance. Novartis challenged this all the way to the Supreme Court.</p>
+
+        <h4>The Outcome & Implications</h4>
+        <p>In 2013, the Supreme Court ruled against Novartis. 
+        <br><strong>Business Implication:</strong> This forced MNC pharma companies to rethink their India strategy. They could no longer rely on evergreening for monopoly profits. Instead, they had to focus on genuine innovation or enter licensing agreements with local generic manufacturers like <strong>Sun Pharma</strong> and <strong>Cipla</strong>.</p>
+    </div>
+
+    <div class="page">
+        <div class="page-number">Page 9</div>
+
+        <h2>7. Policy Challenges and Criticisms</h2>
+
+        <h3>7.1 The E-Commerce Moratorium (The 2026 Fiscal Cliff)</h3>
+        <p>Since 1998, WTO members have renewed a moratorium on imposing customs duties on "Electronic Transmissions." This means Netflix streams, software downloads, and digital books cross borders tax-free.</p>
+        
+        <div class="chart-container" style="height: 220px;">
+            <canvas id="servicesChart"></canvas>
+        </div>
+        <div class="caption">Figure 2: Growth of Digital Services vs. Physical Goods Trade</div>
+
+        <p><strong>The Crisis:</strong> As trade digitizes (physical books → e-books), developing nations lose tariff revenue. India and South Africa have led the opposition, arguing this subsidizes Big Tech in the West at the cost of the Global South. The moratorium is set to expire in 2026, potentially triggering a chaotic era of "Digital Tariffs."</p>
+
+        <h3>7.2 The Breakdown of Dispute Settlement</h3>
+        <p>The "Crown Jewel" of the WTO was its binding dispute settlement system. However, since 2019, the United States has blocked the appointment of judges to the Appellate Body, rendering it paralyzed. We have regressed to a system where "Might is Right." Large economies can impose illegal tariffs (e.g., US Section 232 Steel Tariffs) knowing that even if a panel rules against them, they can "appeal into the void" and block enforcement.</p>
+    </div>
+
+    <div class="page">
+        <div class="page-number">Page 10</div>
+
+        <h2>8. Conclusion and Managerial Recommendations</h2>
+        
+        <p>The analysis confirms that the multilateral trading system is in a state of flux. While the WTO remains vital for the baseline rules of trade (like MFN), its ability to drive further liberalization or resolve conflicts has eroded. We are entering an era of <strong>"Reglobalization"</strong>—where trade integration continues, but along regional and geopolitical lines rather than universal multilateralism.</p>
+
+        <h3>Managerial Recommendations</h3>
+        <p>For business leaders navigating this landscape in 2025 and beyond, we recommend a three-pronged strategy:</p>
+
+        <div style="margin-top: 20px;">
+            <div class="box box-gold">
+                <h4>1. Strategic Diversification (China + 1)</h4>
+                <p style="margin-bottom: 0;">Do not rely on a single source for critical components. Moving production to Vietnam, India, or Mexico is no longer just about cost arbitrage; it is a necessary hedge against tariff wars and supply chain weaponization.</p>
+            </div>
+
+            <div class="box box-gold">
+                <h4>2. Leverage Bilateral FTAs</h4>
+                <p style="margin-bottom: 0;">With the WTO stalled, the action has shifted to Free Trade Agreements (FTAs). Managers must audit their supply chains to maximize benefits from deals like the <strong>India-UAE CEPA</strong> or <strong>India-Australia ECTA</strong> to secure zero-duty access.</p>
+            </div>
+
+            <div class="box box-gold">
+                <h4>3. Prepare for the "Green" Barrier</h4>
+                <p style="margin-bottom: 0;">Sustainability is the new trade barrier. Firms exporting to the EU or US must invest in decarbonization and traceability. Carbon audits will soon be as mandatory as financial audits for market access.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="page-number">Page 11</div>
+
+        <h2>References & Bibliography</h2>
+        
+        <h4>Primary Data Sources</h4>
+        <ul>
+            <li>WTO. (2024). <em>World Trade Statistical Review 2024</em>. Geneva: World Trade Organization.</li>
+            <li>UNCTAD. (2024). <em>World Investment Report 2024: Investment Facilitation and Digital Government</em>. United Nations.</li>
+            <li>World Bank. (2025). <em>World Integrated Trade Solution (WITS) Database: India Country Profile</em>.</li>
+            <li>Ministry of Commerce & Industry, Govt. of India. (2024). <em>Annual Report 2023-24</em>. New Delhi.</li>
+        </ul>
+
+        <h4>Legal Texts & Dispute Reports</h4>
+        <ul>
+            <li>WTO. (1994). <em>Marrakesh Agreement Establishing the World Trade Organization</em>.</li>
+            <li>Panel Report. (2023). <em>India — Tariff Treatment on Certain Goods in the Information and Communications Technology Sector (WT/DS582)</em>.</li>
+            <li>Supreme Court of India. (2013). <em>Novartis AG v. Union of India & Others</em>. Civil Appeal No. 2706-2716.</li>
+        </ul>
+
+        <h4>Academic & Periodical Sources</h4>
+        <ul>
+            <li>Baldwin, R. (2016). <em>The Great Convergence: Information Technology and the New Globalization</em>. Harvard University Press.</li>
+            <li>Rodrik, D. (2018). <em>Straight Talk on Trade: Ideas for a Sane World Economy</em>. Princeton University Press.</li>
+            <li>Subramanian, A., & Kessler, M. (2013). "The Hyperglobalization of Trade and Its Future." <em>Peterson Institute for International Economics</em>.</li>
+            <li>Okonjo-Iweala, N. (2024). "Re-globalization: Trade for the Many." <em>Foreign Affairs</em>.</li>
+        </ul>
+    </div>
+
+    <script>
+        // Chart options optimized for print (high contrast)
+        const printChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { font: { family: 'Oswald' } } } },
+            scales: {
+                x: { grid: { display: false }, ticks: { font: { family: 'Oswald' } } },
+                y: { beginAtZero: true, ticks: { font: { family: 'Oswald' } } }
+            }
+        };
+
+        // Chart 1
+        new Chart(document.getElementById('tradeChart'), {
+            type: 'line',
+            data: {
+                labels: ['2012', '2014', '2016', '2018', '2020', '2022', '2024'],
+                datasets: [{
+                    label: 'Global Trade Index (Vol)',
+                    data: [100, 112, 114, 120, 115, 128, 130],
+                    borderColor: '#1e3a8a',
+                    backgroundColor: 'rgba(30, 58, 138, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 4
+                }]
+            },
+            options: printChartOptions
+        });
+
+        // Chart 2
+        new Chart(document.getElementById('servicesChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2015', '2018', '2021', '2024'],
+                datasets: [
+                    { label: 'Digital Services', data: [155, 205, 240, 345], backgroundColor: '#d97706' },
+                    { label: 'Physical Goods', data: [260, 300, 390, 435], backgroundColor: '#334155' }
+                ]
+            },
+            options: printChartOptions
+        });
+    </script>
+
+</body>
+</html>
